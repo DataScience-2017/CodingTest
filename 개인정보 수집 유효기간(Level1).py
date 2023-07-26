@@ -12,6 +12,7 @@ def solution(today, terms, privacies):
         terms_dict[type_] = change_to_date(0, month, 0)  # 딕셔너리에 저장합니다.
 
     # 현재 날짜를 숫자로 바꿉니다.
+    # 이제 여기에 *을 붙여서 함수에 인자를 전달하면, 이 리스트의 각 요소가 함수의 각 인자로 전달됩니다. 따라서 change_to_date(*today.split('.'))는 change_to_date("2023", "07", "26")와 같습니다.
     today_date = change_to_date(*today.split('.'))
 
     # 각 개인 정보에 대해
