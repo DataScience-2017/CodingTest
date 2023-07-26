@@ -1,6 +1,6 @@
 -- MEMBER_PROFILE 테이블을 M, REST_REVIEW 테이블을 R로 별칭(alias)를 주었습니다.
 -- 별칭을 사용하면 테이블 이름을 반복해서 쓸 필요가 없어 코드가 간결해집니다.
-SELECT M.MEMBER_NAME, R.REVIEW_TEXT, R.REVIEW_DATE
+SELECT M.MEMBER_NAME, R.REVIEW_TEXT, DATE_FORMAT(R.REVIEW_DATE, "%Y-%m-%d")
 FROM MEMBER_PROFILE M
 -- REST_REVIEW 테이블을 서브쿼리로 처리했습니다. 이 서브쿼리는 리뷰를 가장 많이 작성한 회원의 모든 리뷰를 선택합니다.
 JOIN (
@@ -25,7 +25,7 @@ ORDER BY R.REVIEW_DATE, R.REVIEW_TEXT
 
 
 ---------------다수 선택----------------------
-SELECT M.MEMBER_NAME, R.REVIEW_TEXT, R.REVIEW_DATE
+SELECT M.MEMBER_NAME, R.REVIEW_TEXT, DATE_FORMAT(R.REVIEW_DATE, "%Y-%m-%d")
 FROM MEMBER_PROFILE M
 JOIN (
     SELECT REVIEW_TEXT, REVIEW_DATE, MEMBER_ID
