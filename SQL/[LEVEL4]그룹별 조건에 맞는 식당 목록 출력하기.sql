@@ -21,3 +21,25 @@ JOIN (
 ON R.MEMBER_ID = M.MEMBER_ID
 -- 결과를 리뷰 작성일과 리뷰 텍스트 순으로 오름차순 정렬했습니다.
 ORDER BY R.REVIEW_DATE, R.REVIEW_TEXT
+
+
+
+---------------다수 선택----------------------
+SELECT M.MEMBER_NAME, R.REVIEW_TEXT, R.REVIEW_DATE
+FROM MEMBER_PROFILE M
+JOIN (
+    SELECT REVIEW_TEXT, REVIEW_DATE, MEMBER_ID
+    FROM REST_REVIEW
+    WHERE MEMBER_ID IN (
+        SELECT MEMBER_ID
+        FROM (
+            SELECT MEMBER_ID
+            FROM REST_REVIEW
+            GROUP BY MEMBER_ID
+            ORDER BY COUNT(*) DESC
+            LIMIT 1
+        ) TMP
+    )
+) R
+ON R.MEMBER_ID = M.MEMBER_ID
+ORDER BY R.REVIEW_DATE, R.REVIEW_TEXT;
